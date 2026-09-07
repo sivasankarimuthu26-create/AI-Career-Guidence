@@ -1,18 +1,69 @@
-# React + Vite
+# CareerGenie
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An AI-powered career guidance platform built as my final year project. It helps students figure out career paths based on their skills and academics, and also includes a resume builder, ATS resume checker, and an interview prep chatbot.
 
-Currently, two official plugins are available:
+The idea came from seeing a lot of students (including myself) confused about which career direction to take after college. This tries to make that decision a bit more data-driven instead of just guesswork.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What it does
 
-## React Compiler
+- Recommends career paths using ML models (Decision Tree, Random Forest, SVM) trained on academic and skill data
+- Resume builder with guided sections
+- ATS score checker — tells you how well your resume would perform against applicant tracking systems
+- A chatbot for interview prep and general career questions
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech stack
 
-## Expanding the ESLint configuration
+- **Frontend:** React (Vite)
+- **Backend:** Node.js + Express
+- **ML service:** Python + Flask (separate microservice for the model predictions)
+- **Database:** PostgreSQL
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project
-Testing feature branch workflow 
-Testing feature branch workflow mode
+I split the ML part into its own Flask service instead of cramming it into the Node backend — made it easier to work on the models independently.
+
+## Project structure
+
+```
+AI-Career-Guidence/
+├── frontend/     -> React app
+├── backend/      -> Express API
+└── ml-service/   -> Flask app serving the ML models
+```
+
+## Running it locally
+
+You'll need Node.js and Python installed.
+
+```bash
+git clone https://github.com/sivasankarimuthu26-create/AI-Career-Guidence.git
+cd AI-Career-Guidence
+```
+
+Frontend:
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Backend:
+```bash
+cd backend
+npm install
+node server.js
+```
+
+ML service:
+```bash
+cd ml-service
+pip install -r requirements.txt
+python app.py
+```
+
+## Status
+
+Still a work in progress — currently building out the ML model training pipeline and connecting it to the resume/ATS features. Not deployed yet.
+
+## About
+
+Built by Sivasankari M, final year CSE student.
+[GitHub](https://github.com/sivasankarimuthu26-create) · [LinkedIn](https://linkedin.com/in/sivasankarim-webdev)
