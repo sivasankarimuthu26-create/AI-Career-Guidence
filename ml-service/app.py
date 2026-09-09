@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-
 app = Flask(__name__)
 
 
@@ -25,10 +24,12 @@ def predict():
 
     # Default recommendation
     career = "Full Stack Developer"
+
     description = (
         "A Full Stack Developer builds both the frontend and backend "
         "of web applications and works with databases and APIs."
     )
+
     skills = [
         "HTML",
         "CSS",
@@ -39,6 +40,7 @@ def predict():
         "MongoDB",
         "REST APIs"
     ]
+
     roadmap = [
         "Strengthen HTML, CSS and JavaScript",
         "Learn React.js",
@@ -49,14 +51,18 @@ def predict():
         "Deploy projects and create a portfolio"
     ]
 
+
     # Career prediction logic
 
     if "data science" in technical_area:
+
         career = "Data Scientist"
+
         description = (
             "A Data Scientist analyzes data and uses statistics, "
             "programming and machine learning to solve real-world problems."
         )
+
         skills = [
             "Python",
             "SQL",
@@ -66,6 +72,7 @@ def predict():
             "Machine Learning",
             "Data Visualization"
         ]
+
         roadmap = [
             "Learn Python",
             "Learn SQL",
@@ -76,12 +83,16 @@ def predict():
             "Build data science projects"
         ]
 
+
     elif "artificial intelligence" in technical_area or "ai" in technical_area:
+
         career = "AI/ML Engineer"
+
         description = (
             "An AI/ML Engineer develops intelligent systems using "
             "machine learning and artificial intelligence techniques."
         )
+
         skills = [
             "Python",
             "Machine Learning",
@@ -91,6 +102,7 @@ def predict():
             "Scikit-learn",
             "TensorFlow/PyTorch"
         ]
+
         roadmap = [
             "Learn Python",
             "Learn mathematics and statistics",
@@ -101,12 +113,16 @@ def predict():
             "Deploy ML models using APIs"
         ]
 
+
     elif "cybersecurity" in technical_area:
+
         career = "Cybersecurity Analyst"
+
         description = (
             "A Cybersecurity Analyst protects systems, networks and "
             "applications from security threats and attacks."
         )
+
         skills = [
             "Networking",
             "Linux",
@@ -116,6 +132,7 @@ def predict():
             "Cryptography",
             "Security Tools"
         ]
+
         roadmap = [
             "Learn computer networking",
             "Learn Linux",
@@ -126,12 +143,16 @@ def predict():
             "Complete cybersecurity projects"
         ]
 
+
     elif "cloud computing" in technical_area or "cloud" in technical_area:
+
         career = "Cloud Engineer"
+
         description = (
             "A Cloud Engineer designs, deploys and manages applications "
             "and infrastructure on cloud platforms."
         )
+
         skills = [
             "AWS/Azure/GCP",
             "Linux",
@@ -141,6 +162,7 @@ def predict():
             "CI/CD",
             "Cloud Security"
         ]
+
         roadmap = [
             "Learn Linux",
             "Learn networking fundamentals",
@@ -151,12 +173,16 @@ def predict():
             "Build and deploy cloud projects"
         ]
 
+
     elif "networking" in technical_area:
+
         career = "Network Engineer"
+
         description = (
             "A Network Engineer designs, configures and maintains "
             "computer networks and network infrastructure."
         )
+
         skills = [
             "Computer Networks",
             "TCP/IP",
@@ -166,6 +192,7 @@ def predict():
             "Network Security",
             "Cloud Networking"
         ]
+
         roadmap = [
             "Learn networking fundamentals",
             "Study TCP/IP",
@@ -176,12 +203,16 @@ def predict():
             "Work on networking projects"
         ]
 
+
     elif "design" in interest:
+
         career = "UI/UX Designer"
+
         description = (
             "A UI/UX Designer creates user-friendly and visually "
             "appealing interfaces for websites and applications."
         )
+
         skills = [
             "Figma",
             "UI Design",
@@ -191,6 +222,7 @@ def predict():
             "User Research",
             "Design Systems"
         ]
+
         roadmap = [
             "Learn UI/UX fundamentals",
             "Learn Figma",
@@ -201,12 +233,16 @@ def predict():
             "Build a UI/UX portfolio"
         ]
 
+
     elif "web development" in technical_area:
+
         career = "Full Stack Developer"
+
         description = (
             "A Full Stack Developer builds complete web applications "
             "using frontend, backend and database technologies."
         )
+
         skills = [
             "HTML",
             "CSS",
@@ -217,6 +253,7 @@ def predict():
             "MongoDB",
             "REST APIs"
         ]
+
         roadmap = [
             "Master HTML and CSS",
             "Improve JavaScript",
@@ -227,9 +264,67 @@ def predict():
             "Deploy your applications"
         ]
 
+
+    # =====================================
+    # CALCULATE CAREER MATCH SCORE
+    # =====================================
+
+    match_score = 70
+
+
+    # Programming skill level
+
+    if programming_level == "advanced":
+        match_score += 10
+
+    elif programming_level == "intermediate":
+        match_score += 6
+
+    elif programming_level == "beginner":
+        match_score += 2
+
+
+    # CGPA score
+
+    try:
+        cgpa = float(data.get("cgpa", 0))
+
+        if cgpa >= 9:
+            match_score += 10
+
+        elif cgpa >= 8:
+            match_score += 8
+
+        elif cgpa >= 7:
+            match_score += 6
+
+        elif cgpa >= 6:
+            match_score += 4
+
+        else:
+            match_score += 2
+
+    except (ValueError, TypeError):
+        cgpa = 0
+
+
+    # Career goal bonus
+
+    if career_goal:
+        match_score += 5
+
+
+    # Maximum score
+
+    match_score = min(match_score, 98)
+
+
+    # Send response
+
     return jsonify({
         "success": True,
         "career": career,
+        "matchScore": match_score,
         "description": description,
         "skills": skills,
         "roadmap": roadmap,
@@ -237,5 +332,8 @@ def predict():
     })
 
 
+import os
+
 if __name__ == "__main__":
-    app.run(port=5001, debug=True)
+    port = int(os.environ.get("PORT", 5001))
+    app.run(host="0.0.0.0", port=port)
