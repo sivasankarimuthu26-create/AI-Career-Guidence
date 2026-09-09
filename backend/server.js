@@ -4,6 +4,16 @@ require("dotenv").config();
 
 const app = express();
 
+const mongoose = require("mongoose");
+
+console.log("Mongo_URI:", process.env.MONGO_URI);
+console.log("ML_SERVICE_URL:", process.env.ML_SERVICE_URL);
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
+  const ML_SERVICE_URL = process.env.ML_SERVICE_URL || "http://localhost:5001";
+
 app.use(cors());
 app.use(express.json());
 
@@ -22,7 +32,7 @@ app.post("/api/assessment", async (req, res) => {
   console.log(studentData);
 
   try {
-    const response = await fetch("http://localhost:5001/predict", {
+    const response = await fetch(`${ML_SERVICE_URL}/predict`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +62,7 @@ app.post("/api/assessment", async (req, res) => {
   }
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
