@@ -5,7 +5,7 @@ require("dotenv").config();
 const app = express();
 
 const mongoose = require("mongoose");
-
+const Assessment = require("./models/Assessment");
 console.log("Mongo_URI:", process.env.MONGO_URI);
 console.log("ML_SERVICE_URL:", process.env.ML_SERVICE_URL);
 
@@ -41,17 +41,34 @@ app.post("/api/assessment", async (req, res) => {
     });
 
     const prediction = await response.json();
-
     console.log("ML Service response:");
     console.log(prediction);
 
-    res.json({
-      success: true,
-      message: "Assessment processed successfully!",
-      data: studentData,
-      prediction: prediction,
+// Save assessment result to MongoDB
+    const assessment = new Assessment({
+    name: studentData.name,
+    cgpa: Number(studentData.cgpa),
+    technicalArea: studentData.technicalArea,
+    programmingLevel: studentData.programmingLevel,
+    interest: studentData.interest,
+    careerGoal: studentData.careerGoal,
+
+    career: prediction.career,
+    matchScore: prediction.matchScore,
+    skills: prediction.skills,
+    roadmap: prediction.roadmap,
     });
 
+await assessment.save();
+
+console.log("✅ Assessment saved to MongoDB");
+
+res.json({
+  success: true,
+  message: "Assessment processed and saved successfully!",
+  data: studentData,
+  prediction: prediction,
+});
   } catch (error) {
     console.error("ML Service error:", error);
 
