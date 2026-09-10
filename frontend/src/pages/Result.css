@@ -193,6 +193,54 @@
     font-size: 25px;
   }
 
+  .match-score {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.match-score span {
+  font-size: 16px;
+}
+
+.match-score strong {
+  font-size: 26px;
+
+  background: rgba(255, 255, 255, 0.2);
+
+  padding: 8px 16px;
+
+  border-radius: 12px;
+}
+.match-score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 17px;
+}
+
+.match-icon {
+  font-size: 20px;
+}
+
+.match-text {
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.match-percentage {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
   .result-section {
     padding: 18px;
   }

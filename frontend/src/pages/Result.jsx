@@ -15,18 +15,35 @@ function Result({ result, onBack }) {
     <div className="result-container">
       <div className="result-card">
 
+        {/* Header */}
         <div className="result-header">
           <div className="result-icon">🎯</div>
 
           <h1>Your Career Recommendation</h1>
 
-          <p>Hello, <strong>{result.name}</strong>! 👋</p>
+          <p>
+            Hello, <strong>{result.name}</strong>! 👋
+          </p>
         </div>
 
         {/* Career */}
         <div className="career-box">
           <p>💼 Recommended Career</p>
+
           <h2>{result.career}</h2>
+
+          {/* Career Match Score */}
+          <div className="match-score">
+            <span className="match-icon">🔥</span>
+
+            <span className="match-text">
+              Career Match Score
+            </span>
+
+            <span className="match-percentage">
+              {result.matchScore}%
+            </span>
+          </div>
         </div>
 
         {/* Description */}
@@ -56,7 +73,9 @@ function Result({ result, onBack }) {
           <div className="roadmap">
             {result.roadmap?.map((step, index) => (
               <div className="roadmap-step" key={index}>
-                <div className="step-number">{index + 1}</div>
+                <div className="step-number">
+                  {index + 1}
+                </div>
 
                 <p>{step}</p>
               </div>
@@ -64,6 +83,7 @@ function Result({ result, onBack }) {
           </div>
         </div>
 
+        {/* Back Button */}
         <button className="back-btn" onClick={onBack}>
           ← Take Assessment Again
         </button>

@@ -1,3 +1,62 @@
+* {
+  box-sizing: border-box;
+}
+
+.assessment-page {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc, #e0e7ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.assessment-card {
+  width: 100%;
+  max-width: 700px;
+  background: white;
+  border-radius: 24px;
+  padding: 45px;
+  box-shadow: 0 20px 50px rgba(30, 58, 138, 0.15);
+}
+
+/* HEADER */
+
+.assessment-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.assessment-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 35px;
+
+  background: #eef2ff;
+  border-radius: 50%;
+}
+
+.assessment-header h1 {
+  margin: 10px 0;
+  font-size: 32px;
+  color: #1e3a8a;
+}
+
+.assessment-header p {
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* STEP INFORMATION */
+
 .step-info {
   text-align: center;
   font-weight: 600;
@@ -5,34 +64,122 @@
   margin-bottom: 10px;
 }
 
+/* PROGRESS BAR */
+
+.progress-container {
+  width: 100%;
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 35px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  border-radius: 20px;
+  transition: width 0.4s ease;
+}
+
+/* QUESTION AREA */
+
 .question-container {
-  min-height: 220px;
+  min-height: 280px;
+  padding: 25px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
 }
 
 .question-container h2 {
   text-align: center;
   color: #1e3a8a;
+  margin-top: 0;
   margin-bottom: 30px;
   font-size: 24px;
 }
+
+/* FORM GROUP */
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  color: #334155;
+}
+
+/* INPUT AND SELECT */
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  height: 52px;
+
+  padding: 0 16px;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+
+  background: white;
+
+  font-size: 16px;
+  color: #334155;
+
+  outline: none;
+
+  transition: all 0.25s ease;
+}
+
+.form-group input::placeholder {
+  color: #94a3b8;
+}
+
+/* FOCUS EFFECT */
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #4f46e5;
+
+  box-shadow:
+    0 0 0 4px rgba(79, 70, 229, 0.12);
+}
+
+/* NAVIGATION */
 
 .navigation-buttons {
   display: flex;
   justify-content: space-between;
   gap: 15px;
+
   margin-top: 30px;
 }
 
 .previous-btn,
-.next-btn {
+.next-btn,
+.submit-btn {
   padding: 15px 28px;
+
   border-radius: 12px;
+
   font-size: 16px;
   font-weight: 600;
+
   cursor: pointer;
+
   border: none;
+
   transition: all 0.25s ease;
 }
+
+/* PREVIOUS */
 
 .previous-btn {
   background: #e2e8f0;
@@ -41,31 +188,80 @@
 
 .previous-btn:hover {
   background: #cbd5e1;
+  transform: translateY(-2px);
 }
+
+/* NEXT */
 
 .next-btn {
   margin-left: auto;
+
   background: linear-gradient(135deg, #2563eb, #7c3aed);
+
   color: white;
+
   box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2);
 }
 
 .next-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+
+  box-shadow: 0 15px 30px rgba(79, 70, 229, 0.3);
 }
 
-.navigation-buttons .submit-btn {
+/* SUBMIT */
+
+.submit-btn {
   margin-left: auto;
+
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+
+  color: white;
+
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2);
 }
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* MOBILE */
 
 @media (max-width: 600px) {
+
+  .assessment-page {
+    padding: 20px 12px;
+  }
+
+  .assessment-card {
+    padding: 25px 18px;
+  }
+
+  .assessment-header h1 {
+    font-size: 26px;
+  }
+
+  .question-container {
+    padding: 20px;
+    min-height: 260px;
+  }
+
+  .question-container h2 {
+    font-size: 21px;
+  }
+
   .navigation-buttons {
     flex-direction: column;
   }
 
   .previous-btn,
   .next-btn,
-  .navigation-buttons .submit-btn {
+  .submit-btn {
     width: 100%;
     margin-left: 0;
   }

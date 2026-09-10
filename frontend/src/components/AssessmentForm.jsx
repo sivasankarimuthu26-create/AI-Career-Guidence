@@ -65,8 +65,7 @@ function AssessmentForm({ onResult }) {
     setLoading(true);
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/assessment",
+      const response = await fetch("https://ai-career-guidence-production.up.railway.app/api/assessment", 
         {
           method: "POST",
           headers: {
@@ -84,6 +83,7 @@ function AssessmentForm({ onResult }) {
         onResult({
           name: formData.name,
           career: data.prediction.career,
+          matchScore: data.prediction.matchScore,
           description: data.prediction.description,
           skills: data.prediction.skills,
           roadmap: data.prediction.roadmap,
