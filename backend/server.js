@@ -79,6 +79,27 @@ res.json({
   }
 });
 
+// Get assessment history
+app.get("/api/assessments", async (req, res) => {
+  try {
+    const assessments = await Assessment.find()
+      .sort({ createdAt: -1 });
+
+    res.json({
+      success: true,
+      assessments: assessments,
+    });
+
+  } catch (error) {
+    console.error("Error fetching assessments:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch assessments",
+    });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
